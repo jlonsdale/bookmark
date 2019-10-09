@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<center>
+
+<h1>CURRENT BOOKMARKS</h1>
+
+<table>
+
+
+  <tr>
+    <th>TITLE</th>
+    <th>URL</th>
+    <th>ACTIONS</th>
+  </tr>
+  <tr>
+
+  <% @bookmarks.each do |bookmark| %>
+    <td><%= bookmark.title %> </td>
+    <td> <%= bookmark.url %></td>
+    <td>
+      <form action ="/bookmarks/<%= bookmark.id %>" method="post">
+        <input type='hidden' name='_method' value='DELETE'>
+        <input type="submit" value="Delete">
+      </form>
+      <form action = "/bookmarks/<%= bookmark.id %>/update" method="get">
+        <input type="hidden" name="title" value="<%= bookmark.title %>">
+        <input type="submit" value="Update">
+      </form>
+    </td>
+  </tr>
+  <% end %>
+  <tr>
+
+</table>
+
+  <h2>
+    <h1> INPUT NEW BOOKMARK </h1>
+    <form action="/add" method="post">
+      url : <input type="text" name="url"><br>
+      <br>
+      title : <input type="text" name="title"><br>
+      <br>
+      <input type="submit" value="Add">
+    </form>
+  </h2>
+
+</center>
+
+</body>
+</html>
